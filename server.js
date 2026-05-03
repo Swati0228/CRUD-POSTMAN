@@ -3,6 +3,7 @@ const app = express();
 const port = 8080;
 
 const connectDB = require('./config/db');
+const Blog = require('./models/Blog');
 
 // ✅ Connect database
 connectDB();
@@ -16,3 +17,20 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
+
+
+app.get('/add', async (req, res) => {
+  try {
+    const blog = new Blog({
+      title: "My First Blog",
+      author: "Swati"
+    });
+
+    await blog.save();
+    res.send("Blog saved");
+
+  } catch (err) {
+    console.log(err);
+    res.status(500).send("Error");
+  }
+});   
