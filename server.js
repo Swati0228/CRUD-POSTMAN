@@ -34,3 +34,12 @@ app.get('/add', async (req, res) => {
     res.status(500).send("Error");
   }
 });   
+app.get('/blogs', async (req, res) => {
+  try {
+    const blogs = await Blog.find();
+    res.json(blogs);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Error fetching blogs");
+  }
+});
