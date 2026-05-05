@@ -43,3 +43,26 @@ app.get('/blogs', async (req, res) => {
     res.status(500).send("Error fetching blogs");
   }
 });
+
+app.put('/blogs/:id', async (req, res) => {
+  try {
+    const updatedBlog = await Blog.findByIdAndUpdate(
+      req.params.id,
+      {
+        title: req.body.title,
+        author: req.body.author
+      },
+      { new: true } // returns updated document
+    );
+
+    if (!updatedBlog) {
+      return res.status(404).send("Blog not found");
+    }
+
+    res.json(updatedBlog);
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Error updating blog");
+  }
+});
