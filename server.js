@@ -66,3 +66,34 @@ app.put('/blogs/:id', async (req, res) => {
     res.status(500).send("Error updating blog");
   }
 });
+
+app.delete('/blogs/:id', async (req, res) => {
+  try {
+    const deletedBlog = await Blog.findByIdAndDelete(req.params.id);
+
+    if (!deletedBlog) {
+      return res.status(404).send("Blog not found");
+    }
+
+    res.send("Blog deleted successfully");
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Error deleting blog");
+  }
+});
+  app.delete('/blogs/:id', async (req, res) => {
+  try {
+    const deletedBlog = await Blog.findByIdAndDelete(req.params.id);
+
+    if (!deletedBlog) {
+      return res.status(404).send("Blog not found");
+    }
+
+    res.send("Blog deleted successfully");
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Error deleting blog");
+  }
+});
