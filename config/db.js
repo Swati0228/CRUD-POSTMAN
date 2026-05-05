@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const connectDB = async () => {
   try {
-    await mongoose.connect("mongodb://localhost:27017/mydatabase");
+    await mongoose.connect("mongodb+srv://username:password@cluster.mongodb.net/blogDB");
 
     const db = mongoose.connection;
 
